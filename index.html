@@ -1,12 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Работа с API</title>
+    <link rel="stylesheet" href="main.css">
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
 </head>
+
 <body>
+    <div class="wrapper">
+        <!--окно авторизации-->
+        <div class="container__auth">
+            <div class="auth__box">
+                <div class="auth__content">
+                    <div class="auth__img">
+                        <img src="./src/img/auth.png" alt="" class="auth__pic">
+                    </div>
+                    <div class="auth__info">
+                        <h1 class="auth__title">Авторизация</h1>
+                        <span class="auth__text">Введите пожалуйста своё фио и ник для дальнейшей авторизации</span>
+                    </div>
+                    <form class="form">
+                        <input type="text" placeholder="Введите ФИО" class="auth__username" required>
+                        <input type="text" placeholder="Введите свой ник" class="auth__usernick" required>
+                        <input type="submit" class="auth__button" value="Войти">
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!---окно самого чата-->
+        <div class="container__chat container">
+            <div class="col__left">
+                <div class="user__info">
+                    <div class="user__photo">
+                        <img src="#" alt="" class="user__img user__img--ava" />
+                    </div>
+                    <div class="user__name"></div>
+                </div>
+                <div class="user__participants">Пользователи</div>
+                <ul class="user__list">
+            </div>
+            <div class="col__right">
+                <div class="messages__container"></div>
+                <div class="message__generate">
+                    <div class="message__generate-box">
+                        <input type="text" placeholder="Введите сообщение..."
+                            class="message__input" /><button class="message__button">Отправить</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--попап фото #1-->
+        <div class="container__popup container__popup--preload container">
+            <div class="user__info user__info--flex">
+                <h3 class="load__photo">Загрузка фото</h3>
+                <div class="user__box">
+                    <div class="user__photo user__photo--popup">
+                        <img src="#" alt="" class="user__img user__img--ava" />
+                    </div>
+                    <div class="user__name user__name--popup"></div>
+                </div>
+                <input type="file" class="photo__file" accept="image/jpeg">
+            </div>
+        </div>
+        <!--попап фото #2-->
+        <div class="container__popup container__popup--load container">
+            <div class="photo__container">
+                <div class="photo__preview">
+                    <img src="#" alt="" class="photo__pic">
+                </div>
+                <span>Область для профильной фотографии</span>
+                <div class="photo__buttons">
+                    <button class="cancel__button">Отмена</button>
+                    <button class="save__button">Сохранить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script id="message" type="text/x-handlebars-template">
+        <div class="message__item {{currentUser}}">
+            <div class="photo__box">
+                <img class="user__img user__img--{{userNick}}" src="{{info.photo}}" alt="">
+            </div>
+            <div class="message__content">
+                <div>
+                    {{info.name}} <b>{{date}}</b>
+                </div>
+                <span class="text">{{info.text}}</span>
+            </div>
+        </div>
+    </script>
+    <script id="users" type="text/x-handlebars-template">
+        <li class="user__elem">
+            <div class="elem">
+                <img class="elem__pic user__img--{{nick}} elem__pic--{{nick}} user__img" src="{{photo}}" alt="">
+            </div>
+
+            <h3 class="title">{{name}} ({{nick}})</h3>
+        </li>
+    </script>
+    <script src="index.js"></script>
+
     
 </body>
+
 </html>
